@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="https://webchat-sandbox.claybox.dc.pype.engineering/redirect.html">
+        <input type="submit" value="Dismiss with redirect">
+    </form>
+    <button id="dismiss">Dismiss without redirect</button>
+
+    <button id="send1">Pass data to webview</button>
+    <button id="both">Pass information from Webview back to the conversational solution upon Redirect URL</button> 
+    <script>
+        var btn = document.getElementById('send1')
+        btn.addEventListener('click', function() {
+            var payload = [{foo:1},{bar: "baz"}]
+            window.parent.postMessage('PYPESTREAM_WEBVIEW_DATA_PASSTHROUGH:'+JSON.stringify(payload), '*')
+        })
+
+        var dismiss = document.getElementById('dismiss')
+        dismiss.addEventListener('click', function() {
+            window.parent.postMessage('PYPESTREAM_WEBVIEW_AUTO_DISMISS', '*')
+        })
+        var both = document.getElementById('both')
+        both.addEventListener('click', function() {
+            var payload = [{foo:1},{bar: "baz"}]
+            window.parent.postMessage('PYPESTREAM_WEBVIEW_DATA_PASSTHROUGH:'+JSON.stringify(payload), '*')
+}),
+('click', function() {
+            window.parent.postMessage('PYPESTREAM_WEBVIEW_AUTO_DISMISS', '*')
+        })
+    </script>
+</body>
+</html>
